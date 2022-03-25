@@ -1,0 +1,6 @@
+[default]
+DEBUG = true
+TITLE = "SYS SALES PYTHON"
+EXTENSIONS = [
+    "app.blueprints.api",
+]
