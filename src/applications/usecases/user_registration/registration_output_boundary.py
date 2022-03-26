@@ -1,9 +1,9 @@
-from domain.src.interfaces.registration_interface import RegistrationInterface
+from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from src.applications.usecases.user_registration.registration_output_interface import RegistrationOutputInterface
 
 
 class RegistrationOutputBoundary(RegistrationOutputInterface):
-    def __init__(self, register: RegistrationInterface):
+    def __init__(self, register: RegisterUserEntityInterface):
         self.__username: str = register.get_username()
         self.__email: str = register.get_email()
         self.__id: str = register.get_id()

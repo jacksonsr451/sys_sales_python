@@ -2,8 +2,8 @@ from unittest import TestCase
 
 import bcrypt
 
-from domain.src.gateweys.registration_gateway import RegistrationGateway
-from domain.src.interfaces.registration_interface import RegistrationInterface
+from domain.src.gateweys.register_user_gateway import RegisterUserGateway
+from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from domain.src.interfaces.registration_presenter_interface import RegistrationPresenterInterface
 from src.applications.usecases.user_registration.registration_input_boundary import RegistrationInputBoundary
 from src.applications.usecases.user_registration.registration_output_boundary import RegistrationOutputBoundary
@@ -14,7 +14,7 @@ from src.applications.usecases.user_registration.user_registration import UserRe
 class TestUserRegistration(TestCase):
     def setUp(self) -> None:
         self.registration = None
-        self.repository: RegistrationGateway = RegistrationRepository()
+        self.repository: RegisterUserGateway = RegisterUserRepository()
         self.username: str = "jackson"
         self.email: str = "jacksonsr45@gmail.com"
         self.password: str = "123456"
@@ -36,8 +36,8 @@ class TestUserRegistration(TestCase):
         self.repository = None
 
 
-class RegistrationRepository(RegistrationGateway):
-    def insert_new_user(self, registration: RegistrationInterface) -> bool():
+class RegisterUserRepository(RegisterUserGateway):
+    def insert_new_user(self, registration: RegisterUserEntityInterface) -> bool():
         return True
 
 

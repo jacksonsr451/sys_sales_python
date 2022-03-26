@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from domain.src.entities.delete_user import DeleteUserEntity
+from domain.src.entities.delete_user_entity import DeleteUserEntity
 from domain.src.interfaces.delete_user_input_interface import DeleteUserInputInterface
 
 

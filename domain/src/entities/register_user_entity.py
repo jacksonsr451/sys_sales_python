@@ -6,14 +6,14 @@ from domain.src.object_values.user_password import UserUserPassword
 from domain.src.object_values.user_password_interface import UserPasswordInterface
 from domain.src.object_values.user_username import UserUserUsername
 from domain.src.object_values.user_username_interface import UserUsernameInterface
-from domain.src.interfaces.registration_interface import RegistrationInterface
+from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from domain.src.object_values.user_id import UserID
 from domain.src.object_values.user_id_interface import UserIDInterface
 from src.applications.contracts.HashPassword import HashPassword
 from src.applications.usecases.user_registration.registration_input_interface import RegistrationInputInterface
 
 
-class Registration(RegistrationInterface):
+class RegisterUserEntity(RegisterUserEntityInterface):
     def __init__(self, register: RegistrationInputInterface):
         self.__username: UserUsernameInterface = UserUserUsername(username=register.get_username())
         self.__email: UserEmailInterface = UserUserEmail(email=register.get_email())

@@ -1,5 +1,5 @@
-from domain.src.gateweys.registration_gateway import RegistrationGateway
-from domain.src.interfaces.registration_interface import RegistrationInterface
+from domain.src.gateweys.register_user_gateway import RegisterUserGateway
+from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from src.infrastructure.adapters.database_connection_adapter import DatabaseConnectionAdapter
 from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
 from src.infrastructure.exceptions.insert_exception import InsertException
@@ -7,14 +7,14 @@ from src.infrastructure.models.user_model import UserModel
 
 
 class UsersRepository(
-    RegistrationGateway
+    RegisterUserGateway
 ):
     def __init__(self):
         self.users: UserModelAdapter = UserModel()
         self.connection = DatabaseConnectionAdapter.get_connection()
         self.data = {"id": "", "username": "", "email": "", "password": ""}
 
-    def insert_new_user(self, registration: RegistrationInterface) -> bool():
+    def insert_new_user(self, registration: RegisterUserEntityInterface) -> bool():
         try:
             self.__init_data(registration=registration)
             self.connection.session.add(UserModel(data=self.data))
@@ -26,7 +26,7 @@ class UsersRepository(
         finally:
             self.connection.session.close()
 
-    def __init_data(self, registration: RegistrationInterface):
+    def __init_data(self, registration: RegisterUserEntityInterface):
         self.data["id"] = registration.get_id()
         self.data["username"] = registration.get_username()
         self.data["email"] = registration.get_email()
