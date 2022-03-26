@@ -1,10 +1,9 @@
-from sqlite3 import Error
-
 from flask_sqlalchemy import Model
 
 from app.extensions.flask_sqlalchemy import data_base
 from domain.src.gateweys.registration_gateway import RegistrationGateway
 from domain.src.interfaces.registration_interface import RegistrationInterface
+from src.infrastructure.exceptions.insert_exception import InsertException
 from src.infrastructure.models.user_model import UserModel
 
 
@@ -26,8 +25,11 @@ class UsersRepository(
             data_base.session.add(self.users)
             data_base.session.commit()
             return True
-        except Error:
-            return False
+        except Exception:
+            data_base.session.rollback()
+            raise InsertException("users")
+        finally:
+            data_base.session.close()
 
     def delete_user_by_id(self, id: str) -> bool():
         try:
@@ -35,8 +37,11 @@ class UsersRepository(
             data_base.session.delete(self.users)
             data_base.session.commit()
             return True
-        except Error:
-            return False
+        except Exception:
+            data_base.session.rollback()
+            raise
+        finally:
+            data_base.session.close()
 
     def delete_user_by_name(self, username: str) -> bool():
         try:
@@ -44,5 +49,8 @@ class UsersRepository(
             data_base.session.delete(self.users)
             data_base.session.commit()
             return True
-        except Error:
-            return False
+        except Exception:
+            data_base.session.rollback()
+            raise
+        finally:
+            data_base.session.close()
