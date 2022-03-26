@@ -7,7 +7,7 @@ from src.interface.gateweys.delete_user_by_id_gateway import DeleteUserByIDGatew
 from src.interface.gateweys.register_user_gateway import RegisterUserGateway
 
 
-class UserRepositoryByID(
+class UserRepository(
     RegisterUserGateway,
     DeleteUserByIDGateway
 ):

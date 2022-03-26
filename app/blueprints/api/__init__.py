@@ -1,12 +1,13 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from app.blueprints.api.user_resource import UserResource
+from app.blueprints.api.user_resource import RegisterUserResource, DeleteUserResource
 
 blueprint = Blueprint("api", __name__, url_prefix="/api/v1")
 api = Api(blueprint)
 
-api.add_resource(UserResource, "/user")
+api.add_resource(RegisterUserResource, "/user")
+api.add_resource(DeleteUserResource, "/user/<id>")
 
 
 def init_app(app):
