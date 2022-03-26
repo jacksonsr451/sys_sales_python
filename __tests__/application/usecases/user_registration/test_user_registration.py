@@ -1,10 +1,10 @@
 from unittest import TestCase
 
-from domain.src.gateweys.register_user_gateway import RegisterUserGateway
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from src.applications.usecases.register_user.register_user_presenter_interface import RegisterUserPresenterInterface
 from src.applications.usecases.register_user.register_user_input_boundary import RegisterUserInputBoundary
 from src.applications.usecases.register_user.register_user import UserRegistration
+from src.interface.gateweys.register_user_gateway import RegisterUserGateway
 
 
 class TestUserRegistration(TestCase):

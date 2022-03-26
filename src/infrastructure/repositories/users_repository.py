@@ -1,12 +1,12 @@
-from domain.src.gateweys.register_user_gateway import RegisterUserGateway
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from src.infrastructure.adapters.database_connection_adapter import DatabaseConnectionAdapter
 from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
 from src.infrastructure.exceptions.insert_exception import InsertException
 from src.infrastructure.models.user_model import UserModel
+from src.interface.gateweys.register_user_gateway import RegisterUserGateway
 
 
-class UsersRepository(
+class UserRepository(
     RegisterUserGateway
 ):
     def __init__(self):

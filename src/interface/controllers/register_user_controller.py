@@ -1,11 +1,11 @@
 from src.applications.usecases.register_user.register_user_presenter_interface import RegisterUserPresenterInterface
 from src.applications.usecases.register_user.register_user_input_boundary import RegisterUserInputBoundary
 from src.applications.usecases.register_user.register_user import UserRegistration
-from src.infrastructure.repositories.users_repository import UsersRepository
+from src.infrastructure.repositories.users_repository import UserRepository
 
 
 class RegistrationController:
-    def __init__(self, request, repository: UsersRepository):
+    def __init__(self, request, repository: UserRepository):
         self.request = request
         self.registration = UserRegistration(repository=repository)
 
