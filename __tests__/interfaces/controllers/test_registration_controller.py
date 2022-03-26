@@ -1,6 +1,8 @@
 from dataclasses import fields
 from unittest import TestCase
 
+from app.app import create_app
+from app.extensions.flask_sqlalchemy import data_base
 from src.infrastructure.repositories.users_repository import UsersRepository
 from src.interface.controllers.registration_controller import RegistrationController
 from src.interface.presenters.registration_presenter import RegistrationPresenter
@@ -8,6 +10,9 @@ from src.interface.presenters.registration_presenter import RegistrationPresente
 
 class TestRegistrationController(TestCase):
     def setUp(self) -> None:
+        self.app = create_app()
+        with self.app.app_context():
+            data_base.create_all(app=self.app)
         self.repository = UsersRepository()
         self.request = {
             "username": "jackson",
@@ -28,7 +33,7 @@ class TestRegistrationController(TestCase):
 
         self.assertTrue(value)
         self.assertTrue(code, 200)
-        self.assertTrue(self.repository.delete_user(where=["username"], values=[self.request["username"]]))
+        self.assertTrue(self.repository.delete_user_by_name(username=self.request["username"]))
 
     def tearDown(self) -> None:
         self.repository = None

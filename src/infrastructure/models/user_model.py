@@ -1,15 +1,16 @@
-from src.infrastructure.models.model_factoring import ModelFactoring
+from app.extensions.flask_sqlalchemy import data_base
 
 
-class UserModel(ModelFactoring):
-    def __init__(self):
-        super(UserModel, self).__init__()
-        self.table_name = "users"
-        self.table(
-            [
-                "id text PRIMARY KEY",
-                "username text NOT NULL UNIQUE",
-                "email text NOT NULL UNIQUE",
-                "password text NOT NULL"
-            ]
-        )
+class UserModel(data_base.Model):
+    __tablename__ = "users"
+    id = data_base.Column(data_base.String(50), primary_key=True)
+    username = data_base.Column(data_base.String(50), unique=True, nullable=False)
+    email = data_base.Column(data_base.String(50), unique=True, nullable=False)
+    password = data_base.Column(data_base.String(150), nullable=False)
+
+    def __init__(self, data: {} = None):
+        if data is not None:
+            self.id: str = data["id"]
+            self.username: str = data["username"]
+            self.email: str = data["email"]
+            self.password: str = data["password"]
