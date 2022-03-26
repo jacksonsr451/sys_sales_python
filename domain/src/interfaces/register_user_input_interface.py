@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class RegistrationOutputInterface(ABC):
+class RegisterUserInputInterface(ABC):
     @abstractmethod
     def get_username(self) -> str:
         print("This method is required")
@@ -11,5 +11,5 @@ class RegistrationOutputInterface(ABC):
         print("This method is required")
 
     @abstractmethod
-    def get_id(self) -> str:
+    def get_password(self) -> str:
         print("This method is required")

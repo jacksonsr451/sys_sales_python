@@ -3,7 +3,7 @@ from flask_restful import Resource
 
 from src.infrastructure.repositories.users_repository import UsersRepository
 from src.interface.controllers.registration_controller import RegistrationController
-from src.interface.presenters.registration_presenter import RegistrationPresenter
+from src.interface.presenters.registration_presenter import RegisterUserPresenter
 
 
 class UserResource(Resource):
@@ -11,6 +11,6 @@ class UserResource(Resource):
     def post(cls):
         print(request.get_json())
         controller = RegistrationController(request=request.get_json(), repository=UsersRepository())
-        presenter = RegistrationPresenter()
+        presenter = RegisterUserPresenter()
         controller.register(presenter=presenter)
         return jsonify(presenter.get_view_model())

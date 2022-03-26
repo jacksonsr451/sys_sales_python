@@ -1,14 +1,10 @@
 from unittest import TestCase
 
-import bcrypt
-
 from domain.src.gateweys.register_user_gateway import RegisterUserGateway
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
-from domain.src.interfaces.registration_presenter_interface import RegistrationPresenterInterface
-from src.applications.usecases.user_registration.registration_input_boundary import RegistrationInputBoundary
-from src.applications.usecases.user_registration.registration_output_boundary import RegistrationOutputBoundary
-from src.applications.usecases.user_registration.registration_output_interface import RegistrationOutputInterface
-from src.applications.usecases.user_registration.user_registration import UserRegistration
+from src.applications.usecases.register_user.register_user_presenter_interface import RegisterUserPresenterInterface
+from src.applications.usecases.register_user.register_user_input_boundary import RegisterUserInputBoundary
+from src.applications.usecases.register_user.register_user import UserRegistration
 
 
 class TestUserRegistration(TestCase):
@@ -25,8 +21,8 @@ class TestUserRegistration(TestCase):
 
     def test_if_registration_execute_and_return_values(self):
         self.registration = UserRegistration(repository=self.repository)
-        registration_input = RegistrationInputBoundary(username=self.username, email=self.email, password=self.password)
-        presenter = RegistrationPresenter()
+        registration_input = RegisterUserInputBoundary(username=self.username, email=self.email, password=self.password)
+        presenter = RegisterUserPresenter()
         self.registration.execute(registration_input=registration_input, presenter=presenter)
 
         self.assertTrue(presenter.get_view_model().result)
@@ -41,7 +37,7 @@ class RegisterUserRepository(RegisterUserGateway):
         return True
 
 
-class RegistrationPresenter(RegistrationPresenterInterface):
+class RegisterUserPresenter(RegisterUserPresenterInterface):
     def __init__(self):
         self.view_model: RegistrationViewModel = None
 

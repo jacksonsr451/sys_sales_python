@@ -5,7 +5,7 @@ from app.app import create_app
 from app.extensions.flask_sqlalchemy import data_base
 from src.infrastructure.repositories.users_repository import UsersRepository
 from src.interface.controllers.registration_controller import RegistrationController
-from src.interface.presenters.registration_presenter import RegistrationPresenter
+from src.interface.presenters.registration_presenter import RegisterUserPresenter
 
 
 class TestRegistrationController(TestCase):
@@ -20,7 +20,7 @@ class TestRegistrationController(TestCase):
             "email": "jacksonsr45@gmail.com"
         }
         self.controller = None
-        self.presenter = RegistrationPresenter()
+        self.presenter = RegisterUserPresenter()
 
     def test_if_controller_is_instance_of(self):
         self.controller = RegistrationController(request=self.request, repository=self.repository)

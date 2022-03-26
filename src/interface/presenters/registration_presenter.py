@@ -1,7 +1,7 @@
-from domain.src.interfaces.registration_presenter_interface import RegistrationPresenterInterface
+from src.applications.usecases.register_user.register_user_presenter_interface import RegisterUserPresenterInterface
 
 
-class RegistrationPresenter(RegistrationPresenterInterface):
+class RegisterUserPresenter(RegisterUserPresenterInterface):
     def __init__(self):
         self.view_model: bool = False
         self.code = 409

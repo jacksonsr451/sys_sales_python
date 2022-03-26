@@ -1,8 +1,8 @@
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
-from src.applications.usecases.user_registration.registration_output_interface import RegistrationOutputInterface
+from src.applications.usecases.register_user.register_user_output_interface import RegisterUserOutputInterface
 
 
-class RegistrationOutputBoundary(RegistrationOutputInterface):
+class RegisterUserOutputBoundary(RegisterUserOutputInterface):
     def __init__(self, register: RegisterUserEntityInterface):
         self.__username: str = register.get_username()
         self.__email: str = register.get_email()

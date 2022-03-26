@@ -1,6 +1,6 @@
-from domain.src.interfaces.registration_presenter_interface import RegistrationPresenterInterface
-from src.applications.usecases.user_registration.registration_input_boundary import RegistrationInputBoundary
-from src.applications.usecases.user_registration.user_registration import UserRegistration
+from src.applications.usecases.register_user.register_user_presenter_interface import RegisterUserPresenterInterface
+from src.applications.usecases.register_user.register_user_input_boundary import RegisterUserInputBoundary
+from src.applications.usecases.register_user.register_user import UserRegistration
 from src.infrastructure.repositories.users_repository import UsersRepository
 
 
@@ -9,8 +9,8 @@ class RegistrationController:
         self.request = request
         self.registration = UserRegistration(repository=repository)
 
-    def register(self, presenter: RegistrationPresenterInterface):
-        registration_input = RegistrationInputBoundary(
+    def register(self, presenter: RegisterUserPresenterInterface):
+        registration_input = RegisterUserInputBoundary(
             username=self.request['username'],
             password=self.request['password'],
             email=self.request['email']

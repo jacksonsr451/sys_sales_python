@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class RegistrationPresenterInterface(ABC):
+class RegisterUserPresenterInterface(ABC):
     @abstractmethod
     def present(self, registration: bool):
         print("This method is required!")

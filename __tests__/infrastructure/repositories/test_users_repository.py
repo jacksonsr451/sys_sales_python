@@ -3,7 +3,7 @@ from unittest import TestCase
 from app.app import create_app
 from app.extensions.flask_sqlalchemy import data_base
 from domain.src.entities.register_user_entity import RegisterUserEntity
-from src.applications.usecases.user_registration.registration_input_boundary import RegistrationInputBoundary
+from src.applications.usecases.register_user.register_user_input_boundary import RegisterUserInputBoundary
 from src.infrastructure.exceptions.insert_exception import InsertException
 from src.infrastructure.repositories.users_repository import UsersRepository
 
@@ -22,14 +22,14 @@ class TestUsersRepository(TestCase):
         self.assertIsInstance(self.repository, UsersRepository)
 
     def test_if_repository_insert_new_user(self):
-        input_register = RegistrationInputBoundary(username=self.username, email=self.email, password=self.password)
+        input_register = RegisterUserInputBoundary(username=self.username, email=self.email, password=self.password)
         registration = RegisterUserEntity(register=input_register)
 
         self.assertTrue(self.repository.insert_new_user(registration=registration))
         self.assertTrue(self.repository.delete_user_by_id(id=registration.get_id()))
 
     def test_if_repository_return_error_insert_exception(self):
-        input_register = RegistrationInputBoundary(username=self.username, email=self.email, password=self.password)
+        input_register = RegisterUserInputBoundary(username=self.username, email=self.email, password=self.password)
         with self.assertRaises(InsertException) as context:
             registration = RegisterUserEntity(register=input_register)
             self.repository.insert_new_user(registration=registration)
