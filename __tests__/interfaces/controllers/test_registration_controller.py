@@ -33,7 +33,7 @@ class TestRegistrationController(TestCase):
 
         self.assertTrue(value)
         self.assertTrue(code, 200)
-        self.assertTrue(self.repository.delete_user_by_name(username=self.request["username"]))
+        self.assertTrue(self.repository.delete_user_by_username(username=self.request["username"]))
 
     def tearDown(self) -> None:
         self.repository = None

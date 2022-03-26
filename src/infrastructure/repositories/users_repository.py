@@ -1,8 +1,7 @@
-from flask_sqlalchemy import Model
-
-from app.extensions.flask_sqlalchemy import data_base
 from domain.src.gateweys.registration_gateway import RegistrationGateway
 from domain.src.interfaces.registration_interface import RegistrationInterface
+from src.infrastructure.adapters.database_connection_adapter import DatabaseConnectionAdapter
+from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
 from src.infrastructure.exceptions.insert_exception import InsertException
 from src.infrastructure.models.user_model import UserModel
 
@@ -11,46 +10,46 @@ class UsersRepository(
     RegistrationGateway
 ):
     def __init__(self):
-        self.users: Model = UserModel()
+        self.users: UserModelAdapter = UserModel()
+        self.connection = DatabaseConnectionAdapter.get_connection()
+        self.data = {"id": "", "username": "", "email": "", "password": ""}
 
     def insert_new_user(self, registration: RegistrationInterface) -> bool():
         try:
-            data = {
-                "id": registration.get_id(),
-                "username": registration.get_username(),
-                "email": registration.get_email(),
-                "password": registration.get_password()
-            }
-            self.users = UserModel(data=data)
-            data_base.session.add(self.users)
-            data_base.session.commit()
+            self.__init_data(registration=registration)
+            self.connection.session.add(UserModel(data=self.data))
+            self.connection.session.commit()
             return True
         except Exception:
-            data_base.session.rollback()
+            self.connection.session.rollback()
             raise InsertException("users")
         finally:
-            data_base.session.close()
+            self.connection.session.close()
+
+    def __init_data(self, registration: RegistrationInterface):
+        self.data["id"] = registration.get_id()
+        self.data["username"] = registration.get_username()
+        self.data["email"] = registration.get_email()
+        self.data["password"] = registration.get_password()
 
     def delete_user_by_id(self, id: str) -> bool():
         try:
-            self.users = UserModel.query.filter_by(id=id).first()
-            data_base.session.delete(self.users)
-            data_base.session.commit()
+            self.connection.session.delete(UserModel.find_by_id(id=id))
+            self.connection.session.commit()
             return True
         except Exception:
-            data_base.session.rollback()
+            self.connection.session.rollback()
             raise
         finally:
-            data_base.session.close()
+            self.connection.session.close()
 
-    def delete_user_by_name(self, username: str) -> bool():
+    def delete_user_by_username(self, username: str) -> bool():
         try:
-            self.users = UserModel.query.filter_by(username=username).first()
-            data_base.session.delete(self.users)
-            data_base.session.commit()
+            self.connection.session.delete(UserModel.find_by_username(username=username))
+            self.connection.session.commit()
             return True
         except Exception:
-            data_base.session.rollback()
+            self.connection.session.rollback()
             raise
         finally:
-            data_base.session.close()
+            self.connection.session.close()

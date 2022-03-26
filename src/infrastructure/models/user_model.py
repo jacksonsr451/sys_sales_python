@@ -1,14 +1,9 @@
-from app.extensions.flask_sqlalchemy import data_base
+from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
 
 
-class UserModel(data_base.Model):
-    __tablename__ = "users"
-    id = data_base.Column(data_base.String(50), primary_key=True)
-    username = data_base.Column(data_base.String(50), unique=True, nullable=False)
-    email = data_base.Column(data_base.String(50), unique=True, nullable=False)
-    password = data_base.Column(data_base.String(150), nullable=False)
-
+class UserModel(UserModelAdapter):
     def __init__(self, data: {} = None):
+        super(UserModel, self).__init__()
         if data is not None:
             self.id: str = data["id"]
             self.username: str = data["username"]
