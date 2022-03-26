@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class RegisterUsernameInterface(ABC):
+class UserEmailInterface(ABC):
     @abstractmethod
-    def get_username(self) -> str:
+    def get_email(self) -> str:
         print("This method is required")

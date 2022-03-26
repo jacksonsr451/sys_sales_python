@@ -1,9 +1,9 @@
 from domain.src.exceptions.password_register_exception import PasswordRegisterException
 from domain.src.interfaces.hash_password_interface import HashPasswordInterface
-from domain.src.object_values.register_password_interface import RegisterPasswordInterface
+from domain.src.object_values.user_password_interface import UserPasswordInterface
 
 
-class RegisterRegisterPassword(RegisterPasswordInterface):
+class UserUserPassword(UserPasswordInterface):
     def __init__(self, password: str):
         if not self.__validate(password=password):
             raise PasswordRegisterException()

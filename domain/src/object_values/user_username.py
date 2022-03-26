@@ -1,8 +1,8 @@
 from domain.src.exceptions.username_register_exception import UsernameRegisterException
-from domain.src.object_values.register_username_interface import RegisterUsernameInterface
+from domain.src.object_values.user_username_interface import UserUsernameInterface
 
 
-class RegisterRegisterUsername(RegisterUsernameInterface):
+class UserUserUsername(UserUsernameInterface):
     def __init__(self, username: str):
         if not self.__validate(username):
             raise UsernameRegisterException()

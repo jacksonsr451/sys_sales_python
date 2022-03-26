@@ -1,10 +1,10 @@
 import re
 
 from domain.src.exceptions.email_register_exception import EmailRegisterException
-from domain.src.object_values.register_email_interface import RegisterEmailInterface
+from domain.src.object_values.user_email_interface import UserEmailInterface
 
 
-class RegisterRegisterEmail(RegisterEmailInterface):
+class UserUserEmail(UserEmailInterface):
     def __init__(self, email):
         self.regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
         if not self.__validate(email):

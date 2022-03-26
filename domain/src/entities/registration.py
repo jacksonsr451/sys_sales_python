@@ -1,11 +1,11 @@
 import uuid
 
-from domain.src.object_values.register_email import RegisterRegisterEmail
-from domain.src.object_values.register_email_interface import RegisterEmailInterface
-from domain.src.object_values.register_password import RegisterRegisterPassword
-from domain.src.object_values.register_password_interface import RegisterPasswordInterface
-from domain.src.object_values.register_username import RegisterRegisterUsername
-from domain.src.object_values.register_username_interface import RegisterUsernameInterface
+from domain.src.object_values.user_email import UserUserEmail
+from domain.src.object_values.user_email_interface import UserEmailInterface
+from domain.src.object_values.user_password import UserUserPassword
+from domain.src.object_values.user_password_interface import UserPasswordInterface
+from domain.src.object_values.user_username import UserUserUsername
+from domain.src.object_values.user_username_interface import UserUsernameInterface
 from domain.src.interfaces.registration_interface import RegistrationInterface
 from domain.src.object_values.user_id import UserID
 from domain.src.object_values.user_id_interface import UserIDInterface
@@ -15,9 +15,9 @@ from src.applications.usecases.user_registration.registration_input_interface im
 
 class Registration(RegistrationInterface):
     def __init__(self, register: RegistrationInputInterface):
-        self.__username: RegisterUsernameInterface = RegisterRegisterUsername(username=register.get_username())
-        self.__email: RegisterEmailInterface = RegisterRegisterEmail(email=register.get_email())
-        self.__password: RegisterPasswordInterface = RegisterRegisterPassword(password=register.get_password())
+        self.__username: UserUsernameInterface = UserUserUsername(username=register.get_username())
+        self.__email: UserEmailInterface = UserUserEmail(email=register.get_email())
+        self.__password: UserPasswordInterface = UserUserPassword(password=register.get_password())
         self.__id: UserIDInterface = UserID()
 
     def get_id(self) -> str:
