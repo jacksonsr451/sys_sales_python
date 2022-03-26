@@ -7,7 +7,7 @@ from src.applications.usecases.register_user.register_user import UserRegistrati
 from src.interface.gateweys.register_user_gateway import RegisterUserGateway
 
 
-class TestUserRegistration(TestCase):
+class TestRegisterUser(TestCase):
     def setUp(self) -> None:
         self.registration = None
         self.repository: RegisterUserGateway = RegisterUserRepository()

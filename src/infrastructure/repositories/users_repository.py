@@ -3,11 +3,13 @@ from src.infrastructure.adapters.database_connection_adapter import DatabaseConn
 from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
 from src.infrastructure.exceptions.insert_exception import InsertException
 from src.infrastructure.models.user_model import UserModel
+from src.interface.gateweys.delete_user_by_id_gateway import DeleteUserByIDGateway
 from src.interface.gateweys.register_user_gateway import RegisterUserGateway
 
 
-class UserRepository(
-    RegisterUserGateway
+class UserRepositoryByID(
+    RegisterUserGateway,
+    DeleteUserByIDGateway
 ):
     def __init__(self):
         self.users: UserModelAdapter = UserModel()

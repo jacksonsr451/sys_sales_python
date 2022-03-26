@@ -3,7 +3,7 @@ from unittest import TestCase
 
 from app.app import create_app
 from app.extensions.flask_sqlalchemy import data_base
-from src.infrastructure.repositories.users_repository import UserRepository
+from src.infrastructure.repositories.users_repository import UserRepositoryByID
 from src.interface.controllers.register_user_controller import RegistrationController
 from src.interface.presenters.register_user_presenter import RegisterUserPresenter
 
@@ -13,7 +13,7 @@ class TestRegistrationController(TestCase):
         self.app = create_app()
         with self.app.app_context():
             data_base.create_all(app=self.app)
-        self.repository = UserRepository()
+        self.repository = UserRepositoryByID()
         self.request = {
             "username": "jackson",
             "password": "123456",
