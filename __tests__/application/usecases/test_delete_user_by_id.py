@@ -3,7 +3,7 @@ from unittest import TestCase
 from src.applications.usecases.delete_user_by_id.delete_user_by_id import DeleteUserByID
 from src.applications.usecases.delete_user_by_id.delete_user_by_id_presenter_interface import \
     DeleteUserByIDPresenterInterface
-from src.interface.gateweys.delete_user_by_id_gateway import DeleteUserByIDGateway
+from src.applications.usecases.delete_user_by_id.delete_user_by_id_gateway import DeleteUserByIDGateway
 
 
 class TestDeleteUserByID(TestCase):
