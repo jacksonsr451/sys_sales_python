@@ -1,4 +1,5 @@
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
+from src.applications.usecases.list_users.list_users_gateway import ListUsersGateway
 from src.infrastructure.adapters.database_connection_adapter import DatabaseConnectionAdapter
 from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
 from src.infrastructure.exceptions.insert_exception import InsertException
@@ -9,7 +10,8 @@ from src.interface.gateweys.register_user_gateway import RegisterUserGateway
 
 class UserRepository(
     RegisterUserGateway,
-    DeleteUserByIDGateway
+    DeleteUserByIDGateway,
+    ListUsersGateway
 ):
     def __init__(self):
         self.users: UserModelAdapter = UserModel()
@@ -55,3 +57,13 @@ class UserRepository(
             raise
         finally:
             self.connection.session.close()
+
+    def list_users(self) -> list:
+        try:
+            self.users = UserModel.query.all()
+        except Exception:
+            self.connection.session.rollback()
+            raise
+        finally:
+            self.connection.session.close()
+            return self.users
