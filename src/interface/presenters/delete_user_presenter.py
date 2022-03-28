@@ -1,7 +1,7 @@
 from src.applications.usecases.delete_user_by_id.delete_user_by_id_presenter_interface import DeleteUserByIDPresenterInterface
 
 
-class DeleteUserByIDByIDPresenter(DeleteUserByIDPresenterInterface):
+class DeleteUserByIDPresenter(DeleteUserByIDPresenterInterface):
     def __init__(self):
         self.value: bool = False
         self.code = 409

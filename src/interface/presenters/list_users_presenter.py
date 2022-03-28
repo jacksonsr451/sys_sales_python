@@ -3,9 +3,9 @@ from src.applications.usecases.list_users.list_users_presenter_interface import 
 
 class ListUsersPresenter(ListUsersPresenterInterface):
     def __init__(self):
-        self.users: list = list()
+        self.users = None
 
-    def present(self, list_users: list):
+    def present(self, list_users):
         self.users = list_users
 
     def get_view_model(self):
