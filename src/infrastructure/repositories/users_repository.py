@@ -1,4 +1,3 @@
-from app.blueprints.schemas.user_schema import UserSchema
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
 from src.applications.usecases.list_users.list_users_gateway import ListUsersGateway
 from src.infrastructure.adapters.database_connection_adapter import DatabaseConnectionAdapter

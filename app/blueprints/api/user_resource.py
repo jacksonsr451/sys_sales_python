@@ -1,7 +1,7 @@
-from flask import jsonify, request
+from flask import jsonify, request, make_response
 from flask_restful import Resource
 
-from app.blueprints.schemas.user_schema import UserSchema
+from app.schemas.user_schema import UserSchema
 from src.infrastructure.repositories.users_repository import UserRepository
 from src.interface.controllers.delete_user_by_id_controller import DeleteUserByIDController
 from src.interface.controllers.list_users_controller import ListUsersController
@@ -17,7 +17,8 @@ class RegisterUserResource(Resource):
         controller = RegistrationController(request=request.get_json(), repository=UserRepository())
         presenter = RegisterUserPresenter()
         controller.register(presenter=presenter)
-        return jsonify(presenter.get_view_model())
+        data, statuscode = presenter.get_view_model()
+        return make_response(jsonify(data), statuscode)
 
 
 class DeleteUserResource(Resource):
@@ -26,7 +27,8 @@ class DeleteUserResource(Resource):
         controller = DeleteUserByIDController(id=id, repository=UserRepository())
         presenter = DeleteUserByIDPresenter()
         controller.delete(presenter=presenter)
-        return jsonify(presenter.get_view_model())
+        data, statuscode = presenter.get_view_model()
+        return make_response(jsonify(data), statuscode)
 
 
 class ListUsersResource(Resource):
@@ -36,4 +38,5 @@ class ListUsersResource(Resource):
         presenter = ListUsersPresenter()
         controller.list(presenter=presenter)
         user_schema = UserSchema(many=True)
-        return jsonify(user_schema.dump(presenter.get_view_model()))
+        data, statuscode = presenter.get_view_model()
+        return make_response(jsonify(user_schema.dump(data)), statuscode)

@@ -11,5 +11,5 @@ class RegisterUserPresenter(RegisterUserPresenterInterface):
 
     def get_view_model(self):
         if self.view_model:
-            self.code = 200
+            self.code = 202
         return {"result": self.view_model}, self.code
