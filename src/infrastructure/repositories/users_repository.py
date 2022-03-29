@@ -1,4 +1,5 @@
 from domain.src.interfaces.register_user_entity_interface import RegisterUserEntityInterface
+from src.applications.usecases.get_user_by_id.get_user_by_id_gateway import GetUserByIDGateway
 from src.applications.usecases.list_users.list_users_gateway import ListUsersGateway
 from src.infrastructure.adapters.database_connection_adapter import DatabaseConnectionAdapter
 from src.infrastructure.adapters.user_model_adapter import UserModelAdapter
@@ -11,7 +12,8 @@ from src.applications.usecases.register_user.register_user_gateway import Regist
 class UserRepository(
     RegisterUserGateway,
     DeleteUserByIDGateway,
-    ListUsersGateway
+    ListUsersGateway,
+    GetUserByIDGateway
 ):
     def __init__(self):
         self.users: UserModelAdapter = UserModel()
@@ -63,6 +65,16 @@ class UserRepository(
             self.users = UserModel.query.all()
         except Exception:
             self.connection.session.rollback()
+            raise
+        finally:
+            self.connection.session.close()
+            return self.users
+
+    def get_user_by_id(self, id: str):
+        try:
+            self.users = UserModel.find_by_id(id=id)
+        except Exception:
+            self.connection.rollback()
             raise
         finally:
             self.connection.session.close()
