@@ -8,6 +8,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = false
 EXTENSIONS = [
     "app.extensions.flask_sqlalchemy",
     "app.extensions.flask_marshmallow",
-    
+
+    "app.blueprints.web",
     "app.blueprints.api",
 ]

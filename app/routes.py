@@ -8,4 +8,6 @@ api_routes = [
     (GetUserByIDResource, "/user/<id>")
 ]
 
-web_routes = []
+web_routes = [
+    'app.blueprints.web.home_view',
+]

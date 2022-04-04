@@ -1,7 +1,11 @@
 from flask import Blueprint
 
-blueprint = Blueprint("web", __name__)
+web = Blueprint("web", __name__)
+
+
+def get_web_app():
+    return web
 
 
 def init_app(app):
-    app.register_blueprint(blueprint=blueprint)
+    app.register_blueprint(web)

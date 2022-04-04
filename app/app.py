@@ -1,7 +1,6 @@
 from flask import Flask
 
 from app.blueprints.api import api
-from app.blueprints.web import web
 from app.extensions import configuration
 from app.routes import api_routes, web_routes
 
@@ -10,7 +9,7 @@ def minimal_app():
     app = Flask(__name__)
     configuration.init_app(app=app)
     configuration.init_api_routes(api=api, routes=api_routes)
-    configuration.init_web_routes(api=web, routes=web_routes)
+    configuration.init_web_routes(modules=web_routes)
     return app
 
 
